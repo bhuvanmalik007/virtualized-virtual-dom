@@ -6,6 +6,7 @@ import { updateLocation } from './location'
 import persistState from 'redux-localstorage'
 import { createEpicMiddleware } from 'redux-observable'
 import createRootEpic from './epics'
+import 'rxjs'
 
 const epicMiddleware = createEpicMiddleware(createRootEpic())
 

@@ -2,7 +2,7 @@ import { injectReducer } from '../../store/reducers'
 
 // Sync route definition
 export default(store) => ({
-  path:'login',
+  path:'home',
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
         and embed an async module loader (jsonp) when bundling   */
@@ -12,11 +12,11 @@ export default(store) => ({
       const container = require('./container').default
       const reducer = require('./reducer').default
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'login', reducer })
+      injectReducer(store, { key: 'home', reducer })
       /*  Return getComponent   */
       cb(null, container)
 
       /* Webpack named bundle   */
-    }, 'login')
+    }, 'home')
   }
 })
