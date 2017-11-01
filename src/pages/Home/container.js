@@ -3,10 +3,8 @@ import { pick } from 'ramda' //eslint-disable-line
 import Home from './main'
 
 const mapDispatchToProps = dispatch => ({
-  initState: () => dispatch({ type: 'INIT_STATE' }),
-  loadMore: () => dispatch({ type: 'LOAD_MORE' }),
+  loadMore: () => dispatch({ type: 'INIT_STATE' }),
   showModal: (currentIndex) => dispatch({type:'SHOW_MODAL', currentIndex}),
-  fetchDetails: (imgId) => dispatch({type: 'FETCH_DETAILS', imgId})
 })
 
 const mapStateToProps = state => ({

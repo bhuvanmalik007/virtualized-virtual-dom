@@ -5,10 +5,9 @@ import { connect } from 'react-redux'
 import { Modal } from 'office-ui-fabric-react/lib/Modal'
 import Image from 'grommet/components/Image'
 import Box from 'grommet/components/Box'
-import Split from 'grommet/components/Split'
 import styled from 'styled-components'
-import Card from 'grommet/components/Card'
 import { FoldingCube } from 'better-react-spinkit'
+import { WMGColor } from '../constants'
 
 const FBox = styled.div`
   display: flex;
@@ -62,7 +61,7 @@ const Tags = styled.div`
   color: #fa296f;
 `
 
-const ReduxModal = ({ visibility, showModal, closeModal, data }) =>
+const ReduxModal = ({ visibility, closeModal, data }) =>
     <Modal
       isDarkOverlay
       isOpen={visibility}
@@ -91,23 +90,23 @@ const ReduxModal = ({ visibility, showModal, closeModal, data }) =>
           {data.tags.other_tags && <Tags>{data.tags.other_tags.split(',').map(x => ' #'+x)}</Tags>}
         </DetailsDiv>
       </FBox>}
-      {data && !data.isLoaded &&<LoaderBox>
-        <FoldingCube size={100} color='#e82f77' />
+      {data && !data.isLoaded && <LoaderBox>
+        <FoldingCube size={100} color={WMGColor} />
       </LoaderBox>}
     </Modal>
 
 ReduxModal.propTypes = {
   visibility: PropTypes.bool,
-  showModal: PropTypes.func
+  closeModal: PropTypes.func,
+  data: PropTypes.object
 }
 
 const mapDispatchToProps = dispatch => ({
-  showModal: () => dispatch({ type: 'SHOW_MODAL' }),
   closeModal: () => dispatch({ type: 'CLOSE_MODAL' })
 })
 
 const mapStateToProps = state => ({
-  ...pick(['visibility', 'currentIndex'], state.core),
+  ...pick(['visibility'], state.core),
   data: state.home.results[state.core.currentIndex]
 })
 

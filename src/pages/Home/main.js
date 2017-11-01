@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Box from 'grommet/components/Box'
-import Image from 'grommet/components/Image'
-import Columns from 'grommet/components/Columns'
 import styled from 'styled-components'
-import Paragraph from 'grommet/components/Paragraph'
-import Label from 'grommet/components/Label'
-import { Card, Container } from 'semantic-ui-react'
-import redux from '../../../static/redux.png'
 import InfiniteScroll from 'react-infinite-scroller'
 import {
   CellMeasurer,
@@ -19,10 +12,6 @@ import {
 } from 'react-virtualized'
 import 'react-virtualized/styles.css'
 import { FoldingCube } from 'better-react-spinkit'
-
-const JWBlackLabel = styled(Label)`
-  color: #000000;
-`
 
 const ImageCard = styled.div`
   display: flex;
@@ -95,24 +84,25 @@ const renderMasonry = ({width}, height, scrollTop, results, showModal) => {
   )
 }
 
-export default class Home extends Component {
-
-  render() {
+const Home = props => {
     return <InfiniteScroll
       threshold={10}
       pageStart={0}
-      loadMore={_ => this.props.initState()}
-      hasMore={this.props.hasMore}
+      loadMore={_ => props.loadMore()}
+      hasMore={props.hasMore}
       useWindow={true}
       loader={<FoldingCube size={100} color='#e82f77' />}>
-        <WindowScroller overscanByPixels={0}>
-          {(args) => renderAutoSizer(args, this.props.results, this.props.showModal)}
-        </WindowScroller>
-      </InfiniteScroll>
-  }
+      <WindowScroller overscanByPixels={0}>
+        {(args) => renderAutoSizer(args, props.results, props.showModal)}
+      </WindowScroller>
+    </InfiniteScroll>
 }
 
 Home.PropTypes = {
-  initState: PropTypes.func,
-  showModal: PropTypes.func
+  loadMore: PropTypes.func,
+  showModal: PropTypes.func,
+  results: PropTypes.array,
+  hasMore: PropTypes.bool
 }
+
+export default Home
