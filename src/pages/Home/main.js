@@ -46,7 +46,7 @@ const cellPositioner = createMasonryCellPositioner({
   spacer: 20
 })
 
-const cellRenderer = ({ index, key, parent, style }, results) => {
+const cellRenderer = ({ index, key, parent, style }, results, showModal) => {
   const datum = results[index]
   return <CellMeasurer
     cache={cache}
@@ -54,7 +54,7 @@ const cellRenderer = ({ index, key, parent, style }, results) => {
     key={key}
     parent={parent}
          >
-    <div className='cell' style={style}>
+    <div className='cell' style={style} onClick={() => showModal(index)}>
       <img
         src={datum.image_url.replace('%%X', '400x')}
         style={{
@@ -66,7 +66,7 @@ const cellRenderer = ({ index, key, parent, style }, results) => {
   </CellMeasurer>
 }
 
-const renderAutoSizer = ({height, scrollTop}, results) => {
+const renderAutoSizer = ({height, scrollTop}, results, showModal) => {
   return (<div>
     <AutoSizer
       disableHeight
@@ -74,20 +74,20 @@ const renderAutoSizer = ({height, scrollTop}, results) => {
       // onResize={this._onResize}
       overscanByPixels={0}
       scrollTop={scrollTop}>
-      {(args) => renderMasonry(args, height, scrollTop, results)}
+      {(args) => renderMasonry(args, height, scrollTop, results, showModal)}
     </AutoSizer>
   </div>
   );
 }
 
-const renderMasonry = ({width}, height, scrollTop, results) => {
+const renderMasonry = ({width}, height, scrollTop, results, showModal) => {
   return (
         <Masonry style={{'padding-left':'100px', 'padding-top':'60px' }}
           autoHeight={true}
           cellCount={results.length}
           cellMeasurerCache={cache}
           cellPositioner={cellPositioner}
-          cellRenderer={(args) => cellRenderer(args, results)}
+          cellRenderer={(args) => cellRenderer(args, results, showModal)}
           height={height}
           overscanByPixels={0}
           // ref={this._setMasonryRef}
@@ -115,7 +115,7 @@ export default class Home extends Component {
         useWindow={true}
       >
         <WindowScroller overscanByPixels={0}>
-          {(args) => renderAutoSizer(args, this.props.results)}
+          {(args) => renderAutoSizer(args, this.props.results, this.props.showModal)}
         </WindowScroller>
       </InfiniteScroll>
     </div>

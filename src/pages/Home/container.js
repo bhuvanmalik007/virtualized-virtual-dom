@@ -5,7 +5,8 @@ import Home from './main'
 const mapDispatchToProps = dispatch => ({
   initState: () => dispatch({ type: 'INIT_STATE' }),
   loadMore: () => dispatch({ type: 'LOAD_MORE' }),
-  showModal: (url) => dispatch({type:'SHOW_MODAL', url})
+  showModal: (currentIndex) => dispatch({type:'SHOW_MODAL', currentIndex}),
+  fetchDetails: (imgId) => dispatch({type: 'FETCH_DETAILS', imgId})
 })
 
 const mapStateToProps = state => ({

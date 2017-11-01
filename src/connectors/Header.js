@@ -20,9 +20,7 @@ export const AppHeader = props => (
   <WMGHeader splash={false} responsive wrap float={false} fixed={false}>
     <Box size='xlarge' direction='row' flex align='center' justify='start' alignSelf='center'
       pad={{ horizontal: 'medium', vertical:'none' }} >
-      <WMGTitle>
-        TASK-1
-      </WMGTitle>
+      <img src='https://images.wedmegood.com/images/WMG-logo.svg'></img>
     </Box>
   </WMGHeader>
 )
