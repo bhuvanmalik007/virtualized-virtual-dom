@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable' //eslint-disable-line
 // const url = 'https://api.giphy.com/v1/gifs/search?q=hello&api_key=dc6zaTOxFJmzC'
-const url = 'https://www.wedmegood.com/api/v1/gallery?version=1.3&token=59f6f28c4d4654.99630599&random=78&limit=10&offset='
+const url = 'https://www.wedmegood.com/api/v1/gallery?version=1.3&token=59f6f28c4d4654.99630599&random=78&limit=20&offset='
 
 import request from 'superagent'
 let headers = new Headers({"Access-Control-Allow-Origin": "*"})
