@@ -12,6 +12,10 @@ const CoreBlock = styled.div`
 
 const Content = styled.div`
   flex: 1 auto;
+
+  & div > div > div {
+    width: auto !important;
+  }
 `
 
 export const CoreLayout = ({ children }) => (
