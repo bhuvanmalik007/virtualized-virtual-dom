@@ -29,6 +29,7 @@ const DetailsDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 10px;
+  flex: 1;
   justify-content: space-between;
 `
 
@@ -36,7 +37,7 @@ const DetailCard = styled.div`
   display: flex;
   flex-direction: row;
   box-shadow: 0 8px 8px 0 rgba(46,61,73,.16);
-  width: 100%;
+  width: 95%;
   padding: 7px;
 `
 
