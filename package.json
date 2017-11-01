@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-boilerplate",
+  "name": "Virtualized-Virtual-DOM",
   "version": "1.0.0",
   "description": "Ninjaic Startup for Redux",
   "main": "index.js",
@@ -38,7 +38,7 @@
       }
     },
     "deploy": {
-      "command": "npm run lint && npm run clean && npm run compile",
+      "command": "npm run clean && npm run compile",
       "env": {
         "DEBUG": "app:*"
       }
@@ -73,9 +73,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rajatsharma305/eldritch"
+    "url": "git+https://github.com/bhuvanmalik007/task-1.git"
   },
-  "author": "Rajat Sharma <rajatsharma034@gmail.com> (http://web.rajatsharma.rocks)",
+  "author": "Bhuvan Malik",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.17.0",

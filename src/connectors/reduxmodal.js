@@ -29,7 +29,6 @@ const DetailsDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 10px;
-  width: 100%;
   justify-content: space-between;
 `
 
