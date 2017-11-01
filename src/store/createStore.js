@@ -3,7 +3,6 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { hashHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
-import persistState from 'redux-localstorage'
 import { createEpicMiddleware } from 'redux-observable'
 import createRootEpic from './epics'
 import 'rxjs'
@@ -22,7 +21,6 @@ export default(initialState = {}) => {
   // Store Enhancers
   // ======================================================
   const enhancers = [
-    persistState('core')
   ]
 
   let composeEnhancers = compose
