@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import InfiniteScroll from 'react-infinite-scroller'
@@ -18,6 +18,8 @@ const ImageCard = styled.div`
   flex-direction: column;
   box-shadow: 0 8px 8px 0 rgba(46,61,73,.16);
 `
+
+let ref
 
 const loadFunc = (props) => props.initState()
 
@@ -55,47 +57,74 @@ const cellRenderer = ({ index, key, parent, style }, results, showModal) => {
   </CellMeasurer>
 }
 
-const renderAutoSizer = ({height, scrollTop}, results, showModal) => {
-  return (<div>
-    <AutoSizer
-      disableHeight
-      height={height}
-      overscanByPixels={0}
-      scrollTop={scrollTop}>
-      {(args) => renderMasonry(args, height, scrollTop, results, showModal)}
-    </AutoSizer>
-  </div>
-  );
+const calculateColumnCount = (width) => Math.floor(width / (400 + 20))
+const onResize = ({width}) => {
+  console.log(width)
+  cellPositioner.reset({
+    columnCount: calculateColumnCount(width),
+    columnWidth: 400,
+    spacer: 20
+  })
+  ref.recomputeCellPositions()
 }
 
-const renderMasonry = ({width}, height, scrollTop, results, showModal) => {
-  return (
-        <Masonry style={{ paddingLeft:'6%', paddingRight:'6%', paddingTop:'40px', width:'1200px' }}
-          autoHeight={true}
-          cellCount={results.length}
-          cellMeasurerCache={cache}
-          cellPositioner={cellPositioner}
-          cellRenderer={(args) => cellRenderer(args, results, showModal)}
-          height={height}
+  class AutoSizerX extends Component {
+        constructor(props) {
+        super(props)
+     }
+    componentWillReceiveProps () {
+      cellPositioner.reset({
+        columnCount: calculateColumnCount(this.props.args.width),
+        columnWidth: 400,
+        spacer: 20
+      })
+      ref && ref.recomputeCellPositions()
+    }
+    // console.log(width)
+    render () {
+      return (<div>
+        <AutoSizer
+          disableHeight
+          // onResize={(args) => onResize(args)}
+          height={this.props.args.height}
           overscanByPixels={0}
-          scrollTop={scrollTop}
-          width={width}
-        />
+          scrollTop={this.props.args.scrollTop}>
+          {(args) => renderMasonry(this.props.args.width, this.props.args.height, this.props.args.scrollTop, this.props.results, this.props.showModal)}
+        </AutoSizer>
+      </div>)
+    }
+  }
+
+const renderMasonry = (width, height, scrollTop, results, showModal) => {
+  return (
+          <Masonry style={{ paddingLeft: '6%', paddingRight: '6%', paddingTop: '40px', width: '1200px' }}
+            autoHeight={true}
+            cellCount={results.length}
+            cellMeasurerCache={cache}
+            cellPositioner={cellPositioner}
+            cellRenderer={(args) => cellRenderer(args, results, showModal)}
+            height={height}
+            overscanByPixels={0}
+            scrollTop={scrollTop}
+            width={width}
+            ref={(r) => { ref = r }}
+          />
   )
 }
 
 const Home = props => {
-    return <InfiniteScroll
-      threshold={10}
-      pageStart={0}
-      loadMore={_ => props.loadMore()}
-      hasMore={props.hasMore}
-      useWindow={true}
-      loader={<FoldingCube size={100} color='#e82f77' />}>
-      <WindowScroller overscanByPixels={0}>
-        {(args) => renderAutoSizer(args, props.results, props.showModal)}
-      </WindowScroller>
-    </InfiniteScroll>
+  return <InfiniteScroll
+    threshold={10}
+    pageStart={0}
+    loadMore={_ => props.loadMore()}
+    hasMore={props.hasMore}
+    useWindow={true}
+    loader={<FoldingCube size={100} color='#e82f77' />}>
+    <WindowScroller overscanByPixels={0}>
+      {/* {(args) => renderAutoSizer(args, props.results, props.showModal)} */}
+      {(args) => <AutoSizerX args={args} results={props.results} showModal={props.showModal} />}
+    </WindowScroller>
+  </InfiniteScroll>
 }
 
 Home.PropTypes = {

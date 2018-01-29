@@ -87,7 +87,7 @@ const ReduxModal = ({ visibility, closeModal, data }) =>
               <PhotoSubTitle>{data.image_title}</PhotoSubTitle>
             </PhotoTextDetailContainer>
           </DetailCard>
-          {data.tags.other_tags && <Tags>{data.tags.other_tags.split(',').map(x => ' #'+x)}</Tags>}
+          {data.tags.other_tags && <Tags>{data.tags.other_tags.split(',').map(x => ' #' + x)}</Tags>}
         </DetailsDiv>
       </FBox>}
       {data && !data.isLoaded && <LoaderBox>
