@@ -1,6 +1,6 @@
 # Virtualized Virtual DOM
 
-#### This project is a virtualized DOM in React which implements a masonry in which only the visible elements are rendered and the rest are fetched back as the user scrolls, thereby increasing efficiency and reducing load on the DOM.
+#### This project is a virtualized DOM in React which implements a masonry in which only the visible elements are rendered and the rest are fetched back as the user scrolls, thereby increasing efficiency and reducing load on the DOM. Includes infinite scroll with API calls and window resize support.
 
 ### Technologies used:
 * React
